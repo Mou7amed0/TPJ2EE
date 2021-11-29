@@ -40,7 +40,8 @@ public class UserDatabase {
 			e.printStackTrace();
 			return conn;
 		}
-	}	
+	}
+	
 public String insert(User usr) {
 	Connection conn = getConnection();
 	String result = "Data entered successfully";
@@ -55,17 +56,18 @@ public String insert(User usr) {
 		ps.setString(6, usr.getUsername());
 		ps.setString(7, usr.getPassword());
 		ps.executeUpdate();
-		
+		// close JDBC objects
+		conn.close();
 	} catch (SQLException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
-		result = "Something went wrong !!";
+		result = "Something went wrong !!";	
 	}
 	return result;
 }
-public List<User> getStudents(String usrname, String password) throws Exception {
+public User getStudents(String usrname, String password) throws Exception {
 	
-	User user = new User();
+	User user = null;
 	
 	Connection myConn = null;
 	Statement myStmt = null;
@@ -76,7 +78,7 @@ public List<User> getStudents(String usrname, String password) throws Exception 
 		myConn = dataSource.getConnection();
 		
 		// create sql statement
-		String sql = "select * from users where id = " + usrname;
+		String sql = "SELECT dateOfBirth, firstName, lastName, mobile, email, userName, password FROM users where id = " + usrname;
 		
 		myStmt = myConn.createStatement();
 		
@@ -84,19 +86,22 @@ public List<User> getStudents(String usrname, String password) throws Exception 
 		myRs = myStmt.executeQuery(sql);
 		
 		// process result set
-		myRs.next()
+		myRs.next();
 			
 			// retrieve data from result set row
 
-			String firstName = myRs.getString("first_name");
-			String lastName = myRs.getString("last_name");
-			String 
+			String fname = myRs.getString("firstName");
+			String lname = myRs.getString("lastName");
+			String dbirth = myRs.getString("dateOfBirth");
 			String email = myRs.getString("email");
+			String mobile = myRs.getString("mobile");
+			String uname = myRs.getString("dateOfBirth");
+			String pass = myRs.getString("password");
 
-			User tempUser = new User(fname, lname, dbirth, email, mobile, uname, password);
+			user = new User(fname, lname, dbirth, email, mobile, uname, pass);
 
 		
-		return students;		
+		return user;		
 	}
 	finally {
 		// close JDBC objects
