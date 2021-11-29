@@ -25,7 +25,6 @@ public class UserDatabase {
 		try {
 			Class.forName(dbDriver);
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -38,7 +37,6 @@ public class UserDatabase {
 			System.out.println("You're connected to database");
 			return conn;
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return conn;
 		}
@@ -61,7 +59,6 @@ public class UserDatabase {
 			// close JDBC objects
 			conn.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			result = "Something went wrong !!";
 		}
@@ -101,34 +98,13 @@ public class UserDatabase {
 			String uname = myrs.getString("dateOfBirth");
 			String pass = myrs.getString("password");
 
-			if (password == paa && username == uname && uname != null) {
+			if (password == pass && usrname == uname && uname != null) {
 				user = new User(fname, lname, dbirth, email, mobile, uname, pass);
 			}
 			return user;
 		} catch (Exception e) {
 			e.printStackTrace();
-		} finally {
-			// close JDBC objects
-			close(myconn, mystmt, myrs);
-		}
-	}
-
-	private void close(Connection myConn, Statement myStmt, ResultSet myRs) {
-
-		try {
-			if (myRs != null) {
-				myRs.close();
-			}
-
-			if (myStmt != null) {
-				myStmt.close();
-			}
-
-			if (myConn != null) {
-				myConn.close();
-			}
-		} catch (Exception exc) {
-			exc.printStackTrace();
+			return user;
 		}
 	}
 }
