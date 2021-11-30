@@ -47,7 +47,7 @@ public class RegistrationServlet extends HttpServlet {
 		
 		UserDatabase udb = new UserDatabase();
 		String result = udb.insert(usr);
-		response.getWriter().append("Served at: ").append(result);
+		response.getWriter().append("<b>you're account has been created successfully<br></b>").append(result);
 	}
 
 }

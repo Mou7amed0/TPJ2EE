@@ -44,8 +44,8 @@ public class UserDatabase {
 
 	public String insert(User usr) {
 		Connection conn = getConnection();
-		String result = "Data entered successfully";
 		String sql = "INSERT INTO tp1.users VALUES(?,?,?,?,?,?,?)";
+		String result = "<a href=\"login.jsp\">back to login page</a>";
 		try {
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setString(1, usr.getFirstName());
@@ -58,9 +58,10 @@ public class UserDatabase {
 			ps.executeUpdate();
 			// close JDBC objects
 			conn.close();
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
-			result = "Something went wrong !!";
+			result = "Something went wrong !! <a href=\"registration.jsp\">back to registration page</a>";
 		}
 		return result;
 	}
