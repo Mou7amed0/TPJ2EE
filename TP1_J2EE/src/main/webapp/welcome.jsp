@@ -9,7 +9,10 @@
 <body>
 	<%@ include file="header.jsp" %>
 	
-	<h1> Welcome to our web site have fun</h1>
+	<div align="center">
+		<h1>You have logged in successfully</h1>
+		<h2>Welcome to our universe</h2>
+	</div>
 	
 	<%@ include file="footer.jsp" %>
 </body>
